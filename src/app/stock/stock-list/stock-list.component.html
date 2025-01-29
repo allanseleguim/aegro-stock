@@ -1,0 +1,80 @@
+<!-- stock-list.component.html -->
+<mat-toolbar color="primary" class="toolbar">
+  <span class="title">Controle de Estoque</span>
+  
+  <div class="actions">
+    <button mat-raised-button (click)="openEntryDialog()">
+      <mat-icon>add</mat-icon> Nova Entrada
+    </button>
+    <button mat-raised-button (click)="openRemovalDialog()" class="removal-btn">
+      <mat-icon>remove</mat-icon> Nova Saída
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-card class="filters-card">
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Elemento</mat-label>
+      <input matInput [(ngModel)]="elementFilter" (ngModelChange)="onFilterChange()" placeholder="Filtrar por elemento">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Data Inicial</mat-label>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" (dateChange)="onFilterChange()">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Data Final</mat-label>
+      <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" (dateChange)="onFilterChange()">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="clearFilters()">Limpar Filtros</button>
+  </div>
+</mat-card>
+
+<mat-table [dataSource]="stockLogs" class="mat-elevation-z8">
+  <ng-container matColumnDef="element">
+    <mat-header-cell *matHeaderCellDef> Elemento </mat-header-cell>
+    <mat-cell *matCellDef="let log"> {{ log.elementKey }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell *matHeaderCellDef> Quantidade </mat-header-cell>
+    <mat-cell *matCellDef="let log"> {{ log.quantity.magnitude }} {{ log.quantity.unit | unitFormat }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+    <mat-cell *matCellDef="let log"> {{ log.occurrenceDate | date }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="source">
+    <mat-header-cell *matHeaderCellDef> Origem </mat-header-cell>
+    <mat-cell *matCellDef="let log"> {{ log.sourceLocationKey }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="destination">
+    <mat-header-cell *matHeaderCellDef> Destino </mat-header-cell>
+    <mat-cell *matCellDef="let log"> {{ log.destinationLocationKey }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let log">
+      <button mat-icon-button (click)="editLog(log)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteLog(log)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

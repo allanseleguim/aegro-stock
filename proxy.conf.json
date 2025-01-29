@@ -1,0 +1,29 @@
+{
+  "/api": {
+    "target": "https://app.staging.aegro.io",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "debug"
+  },
+  "/api-http": {
+    "target": "http://app.staging.aegro.io",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-http": ""
+    },
+    "logLevel": "debug"
+  },
+  "/api-https": {
+    "target": "https://app.staging.aegro.io",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-https": ""
+    },
+    "logLevel": "debug"
+  }
+}

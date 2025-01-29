@@ -1,0 +1,43 @@
+// stock-list.component.scss
+.toolbar {
+    justify-content: space-between;
+    margin-bottom: 20px;
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .actions {
+      button {
+        margin-left: 10px;
+      }
+  
+      .removal-btn {
+        background-color: #d32f2f;
+        color: white;
+      }
+    }
+  }
+  
+  .filters-card {
+    margin-bottom: 20px;
+  
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      align-items: center;
+    }
+  }
+  
+  .table-card {
+    padding: 15px;
+  
+    table {
+      width: 100%;
+      
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+  }
